@@ -1,4 +1,4 @@
-from backend.entities._base_entity import BaseEntity
+from backend.entity._base_entity import BaseEntity
 from sqlalchemy import Column, String, ForeignKey, Integer, DateTime, Float
 from datetime import datetime
 from sqlalchemy.orm import relationship

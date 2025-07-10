@@ -1,4 +1,4 @@
-from backend.entities.component_entity import ComponentEntity
+from backend.entity.component_entity import ComponentEntity
 from backend.extensions import db
 from backend.utils.handle.hande_exception import handle_exceptions_repository_class
 

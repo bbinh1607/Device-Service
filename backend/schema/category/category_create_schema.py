@@ -1,7 +1,7 @@
 from marshmallow import Schema, fields, post_load
 
 from backend.schema._custome_validate.custom_types import validate_name, validate_description
-from backend.entities.category_entity import CategoryEntity
+from backend.entity.category_entity import CategoryEntity
 
 class CategoryCreateSchema(Schema):
     name = fields.Str(required=True, validate=validate_name)

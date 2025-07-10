@@ -1,7 +1,7 @@
 from marshmallow import fields, post_load
 from backend.schema.__base_schema import BaseSchema
 from backend.schema._custome_validate.custom_types import validate_name, validate_description
-from backend.entities.component_entity import ComponentEntity
+from backend.entity.component_entity import ComponentEntity
 
 class ComponentCreateSchema(BaseSchema):
     name = fields.String(required=True, validate=validate_name)

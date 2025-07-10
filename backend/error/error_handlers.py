@@ -38,7 +38,7 @@ def handle_general_exception(error):
     return jsonify({
         "error": "Internal Server Error",
         "message": "An unknown error occurred. Please check the logs for more details.",
-        "details": str(error.orig)
+        "details": str(error)
     }), 500
 
 @error_bp.app_errorhandler(SQLAlchemyError)

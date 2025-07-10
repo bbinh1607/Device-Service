@@ -1,5 +1,5 @@
 from marshmallow import Schema, fields, post_load
-from backend.entities.device_detail_entity import DeviceDetailEntity
+from backend.entity.device_detail_entity import DeviceDetailEntity
 
 class DeviceDetailUpdateSchema(Schema):
     area = fields.String(allow_none=True)

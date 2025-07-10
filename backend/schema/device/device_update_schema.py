@@ -1,6 +1,6 @@
 from marshmallow import Schema, fields, post_load
 from backend.schema.__base_schema import BaseSchema
-from backend.entities.device_entity import DeviceEntity
+from backend.entity.device_entity import DeviceEntity
 
 
 class DeviceUpdateSchema(BaseSchema):

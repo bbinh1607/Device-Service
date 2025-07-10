@@ -1,6 +1,6 @@
 from backend.schema.__base_schema import BaseSchema
 from marshmallow import fields, post_load
-from backend.entities.component_detail_entity import ComponentDetailEntity
+from backend.entity.component_detail_entity import ComponentDetailEntity
 
 class ComponentDetailCreateSchema(BaseSchema):
     component_id = fields.String(required=True)

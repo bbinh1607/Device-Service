@@ -1,5 +1,5 @@
 from marshmallow import fields, post_load
-from backend.entities.device_entity import DeviceEntity
+from backend.entity.device_entity import DeviceEntity
 from backend.schema._custome_validate.custom_types import validate_name, validate_description
 from backend.schema.__base_schema import BaseSchema
 

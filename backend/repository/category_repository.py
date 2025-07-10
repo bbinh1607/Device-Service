@@ -1,5 +1,5 @@
 from backend.extensions import db
-from backend.entities.category_entity import CategoryEntity
+from backend.entity.category_entity import CategoryEntity
 from backend.utils.handle.hande_exception import handle_exceptions_repository_class
 
 @handle_exceptions_repository_class

@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
 from backend.error.error_handlers import error_bp
 from backend.controller.category_controller import category_bp
 from backend.controller.device_controller import device_bp
@@ -15,3 +15,8 @@ main_bp.register_blueprint(component_detail_bp, url_prefix="/component-details")
 
 def register_controllers(app):
     app.register_blueprint(main_bp)
+
+
+@main_bp.route("/")
+def home():
+    return render_template("home.html")

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bùi Văn Bình – Portfolio</title>
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <!-- Devicon (programming language icons) -->
+  <link href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #007bff;
+      --dark: #0f172a;
+      --light: #f1f5f9;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--light);
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.09);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 40px 50px;
+      width: 90%;
+      max-width: 900px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    h1 span {
+      color: var(--primary);
+    }
+
+    p.intro {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    .skills {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .skill {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 15px;
+      padding: 20px 25px;
+      text-align: center;
+      width: 120px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: default;
+    }
+
+    .skill:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .skill i,
+    .skill img {
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 10px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .projects {
+      list-style: none;
+    }
+
+    .projects li {
+      margin: 12px 0;
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: all 0.6s ease-out;
+    }
+
+    .projects a {
+      text-decoration: none;
+      color: var(--light);
+      font-weight: 600;
+      position: relative;
+    }
+
+    .projects a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 100%;
+      height: 2px;
+      background: var(--primary);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.4s ease;
+    }
+
+    .projects a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    /* Scroll reveal active state */
+    .reveal {
+      opacity: 1 !important;
+      transform: translateX(0) !important;
+    }
+
+    /* Typing cursor */
+    .typing::after {
+      content: '|';
+      animation: blink 0.7s steps(1) infinite;
+      margin-left: 4px;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+      .skills {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1 id="typing"></h1>
+    <p class="intro">
+      Tôi là <strong>Bùi Văn Bình</strong> – một lập trình viên luôn khao khát học hỏi và hiện thực hoá ý tưởng thành sản phẩm hữu ích. Dưới đây là những kỹ năng và dự án tiêu biểu của tôi.
+    </p>
+
+    <h2>🧠 Kỹ năng lập trình</h2>
+    <div class="skills">
+      <div class="skill">
+        <i class="devicon-python-plain colored"></i>
+        <span>Python</span>
+      </div>
+      <div class="skill">
+        <i class="devicon-java-plain colored"></i>
+        <span>Java</span>
+      </div>
+      <div class="skill">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/Google-flutter-logo.png" alt="Flutter" />
+        <span>Flutter</span>
+      </div>
+    </div>
+
+    <h2>💼 Dự án đã thực hiện</h2>
+    <ul class="projects">
+      <li><a href="https://github.com/username/project1" target="_blank">Ứng dụng Quản lý công việc – Flutter</a></li>
+      <li><a href="https://github.com/username/project2" target="_blank">Website Tin tức – Python Flask</a></li>
+      <li><a href="https://github.com/username/project3" target="_blank">Ứng dụng Chat – Java Socket</a></li>
+    </ul>
+  </div>
+
+  <script>
+    // ====== Typing Animation ======
+    const typingEl = document.getElementById('typing');
+    const text = '👋 Xin chào! Tôi là Bùi Văn Bình';
+    let idx = 0;
+
+    function type() {
+      typingEl.textContent = text.slice(0, idx);
+      if (idx < text.length) {
+        idx++;
+        setTimeout(type, 100);
+      } else {
+        typingEl.classList.add('typing'); // add cursor
+      }
+    }
+    type();
+
+    // ====== Scroll Reveal ======
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.2,
+      }
+    );
+
+    document.querySelectorAll('.projects li').forEach((li) => {
+      observer.observe(li);
+    });
+  </script>
+</body>
+</html>

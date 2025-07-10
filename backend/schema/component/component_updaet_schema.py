@@ -1,6 +1,6 @@
 from marshmallow import fields, post_load
 from backend.schema.__base_schema import BaseSchema
-from backend.entities.component_entity import ComponentEntity
+from backend.entity.component_entity import ComponentEntity
 from backend.schema._custome_validate.custom_types import validate_name, validate_description
 
 class ComponentUpdateSchema(BaseSchema):

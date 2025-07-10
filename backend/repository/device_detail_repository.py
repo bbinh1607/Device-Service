@@ -1,5 +1,5 @@
 from backend.extensions import db
-from backend.entities.device_detail_entity import DeviceDetailEntity
+from backend.entity.device_detail_entity import DeviceDetailEntity
 from backend.utils.handle.hande_exception import handle_exceptions_repository_class
 
 @handle_exceptions_repository_class
