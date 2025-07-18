@@ -1,9 +1,15 @@
 from flask import Blueprint, request
 from backend.services.category_service import CategoryService
 from backend.utils.response.response_helper import api_response
+from backend.utils.before_request.authenticate_request import authenticate_request
 
 category_bp = Blueprint("category", __name__)
 category_service = CategoryService()
+
+@category_bp.before_request
+def before_category_request():
+    authenticate_request()
+
 
 @category_bp.route("/create", methods=["POST"])
 def create_category():

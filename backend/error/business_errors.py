@@ -73,3 +73,9 @@ class CategoryNameExists(BusinessError):
     """Lỗi khi category name đã tồn tại."""
     def __init__(self):
         super().__init__("Category name already exists", 409)
+
+
+class Forbidden(BusinessError):
+    """Lỗi khi user không có quyền thực hiện hành động này."""
+    def __init__(self):
+        super().__init__("Lỗi khi user không có quyền thực hiện hành động này.", 403)

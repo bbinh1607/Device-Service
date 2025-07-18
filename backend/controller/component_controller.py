@@ -1,8 +1,13 @@
 from flask import Blueprint, request
 from backend.services.component_service import ComponentService
 from backend.utils.response.response_helper import api_response
+from backend.utils.before_request.authenticate_request import authenticate_request
 
 component_bp = Blueprint('component', __name__)
+
+@component_bp.before_request
+def before_component_request():
+    authenticate_request()
 
 @component_bp.route('/create', methods=['POST'])
 def create_component():

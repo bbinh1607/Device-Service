@@ -16,9 +16,7 @@ class DeviceService:
     def create_device(self, data):
         device =  DeviceCreateSchema().load(data)
         if device.category_id is not None:
-            print(device.category_id)
             category = self.category_repository.get_category_by_id(device.category_id)
-            print(category)
             if category is None:
                 raise CategoryNotFound()
         device = self.device_repository.create_device(device)

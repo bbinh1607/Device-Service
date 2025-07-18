@@ -1,9 +1,13 @@
 from flask import Blueprint, jsonify, request
 from backend.services.component_detail_service import ComponentDetailService
+from backend.utils.before_request.authenticate_request import authenticate_request
 
 component_detail_bp = Blueprint('component_detail', __name__)
 component_detail_service = ComponentDetailService()
 
+@component_detail_bp.before_request
+def before_component_detail_request():
+    authenticate_request()
 
 @component_detail_bp.route('/get-all', methods=['GET'])
 def get_all_component_detail():
