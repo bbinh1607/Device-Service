@@ -16,9 +16,23 @@ class ComponentRepository:
         component = self.db.query(ComponentEntity).filter(ComponentEntity.id == id).first()
         return component
         
-    def get_all_components(self):
-        components = self.db.query(ComponentEntity).all()
-        return components
+    def get_all_components(self, page=1, limit=10, name=None, barcode=None, device_id=None):
+        query = self.db.query(ComponentEntity)
+
+        if name:
+            query = query.filter(ComponentEntity.name.ilike(f"%{name}%"))
+        if barcode:
+            query = query.filter(ComponentEntity.barcode.ilike(f"%{barcode}%"))
+        if device_id:
+            query = query.filter(ComponentEntity.device_id == device_id)
+
+        total = query.count()
+
+        results = query.order_by(ComponentEntity.created_at.desc()) \
+                    .offset((page - 1) * limit) \
+                    .limit(limit).all()
+
+        return results, total
         
     def update_component(self, id, component: dict):
         query = self.db.query(ComponentEntity).filter(ComponentEntity.id == id)

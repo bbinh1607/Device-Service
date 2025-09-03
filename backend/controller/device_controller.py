@@ -20,8 +20,13 @@ def create():
 
 @device_bp.route("/get-all", methods=["GET"])
 def get_all():
-    result = device_service.get_all_devices()
-    return api_response(data = result)
+    page = int(request.args.get("page", 1))
+    limit = int(request.args.get("limit", 10))
+    name = request.args.get("name", "")
+    create_at = request.args.get("createAt", None)
+
+    result = device_service.get_all_devices(page, limit, name=name, create_at=create_at)
+    return api_response(data=result)
 
 @device_bp.route("/<id>", methods=["PUT"])
 def update(id):

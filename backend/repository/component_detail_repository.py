@@ -15,8 +15,27 @@ class ComponentDetailRepository:
     def get_component_detail_by_id(self, id):
         return self.db.query(ComponentDetailEntity).filter(ComponentDetailEntity.id == id).first()
     
-    def get_all_component_detail(self):
-        return self.db.query(ComponentDetailEntity).all()
+    def get_all_component_detail(self, page=1, limit=10,
+                              component_id=None, device_detail_id=None,
+                                status=None, buy_at=None, ):
+        query = self.db.query(ComponentDetailEntity)
+
+        if component_id:
+            query = query.filter(ComponentDetailEntity.component_id == component_id)
+        if device_detail_id:
+            query = query.filter(ComponentDetailEntity.device_detail_id == device_detail_id)
+        if status:
+            query = query.filter(ComponentDetailEntity.status.ilike(f"%{status}%"))
+        if buy_at:
+            query = query.filter(func.date(ComponentDetailEntity.buy_at) == buy_at)
+
+        total = query.count()
+
+        results = query.order_by(ComponentDetailEntity.created_at.desc()) \
+                    .offset((page - 1) * limit) \
+                    .limit(limit).all()
+
+        return results, total
     
     def update_component_detail(self, id, component_detail):
         query = self.db.query(ComponentDetailEntity).filter(ComponentDetailEntity.id == id)

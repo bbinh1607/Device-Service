@@ -1,3 +1,4 @@
+from sqlalchemy import func
 from backend.entity import DeviceEntity
 from backend.extensions import db
 from backend.utils.handle.hande_exception import handle_exceptions_repository_class
@@ -16,13 +17,15 @@ class DeviceRepository:
         device_data = self.db.query(DeviceEntity).filter(DeviceEntity.id == device_id).first()
         return device_data
         
-    def get_all_devices(self):
-        try:
-            device_data = self.db.query(DeviceEntity).all()
-            return device_data
-        except Exception as e:
-            self.db.rollback()
-            raise e
+    def get_all_devices(self, page, limit, name , create_at):
+        query = self.db.query(DeviceEntity)
+        if name:
+            query = query.filter(DeviceEntity.name.ilike(f"%{name}%"))
+        if create_at:
+            query = query.filter(func.date(DeviceEntity.created_at) == create_at)
+        total = query.count()
+        devices = query.offset((page - 1) * limit).limit(limit).all()
+        return devices, total
         
     def update_device(self, device_id: str, device: DeviceEntity):
         query = self.db.query(DeviceEntity).filter(DeviceEntity.id == device_id)

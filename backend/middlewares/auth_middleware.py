@@ -21,7 +21,7 @@ def authentication(role=None, rank=None):
                     g.user_id = payload.get("sub")
                     g.role = payload.get("role", "guest")
                     g.rank = int(payload.get("rank", 0))
-                    g.token = token
+                g.token = token
             if role and g.role.lower() != role.lower():
                 raise Forbidden()
 

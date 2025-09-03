@@ -1,3 +1,4 @@
+from sqlalchemy import func
 from backend.extensions import db
 from backend.entity.device_detail_entity import DeviceDetailEntity
 from backend.utils.handle.hande_exception import handle_exceptions_repository_class
@@ -31,8 +32,32 @@ class DeviceDetailRepository:
         return device_detail_data
     
     
-    def get_all_device_detail(self):
-        return self.db.query(DeviceDetailEntity).all()
+    def get_all_device_detail(self, page, limit, name=None, create_at=None, device_id=None, area=None, buy_at=None, warranty=None, status=None):
+        query = self.db.query(DeviceDetailEntity)
+
+        if name:
+            query = query.filter(query.DeviceEntity.name.ilike(f"%{name}%"))
+        if create_at:
+            query = query.filter(func.date(DeviceDetailEntity.created_at) == create_at)
+        if device_id:
+            query = query.filter(DeviceDetailEntity.device_id == device_id)
+        if area:
+            query = query.filter(DeviceDetailEntity.area.ilike(f"%{area}%"))
+        if buy_at:
+            query = query.filter(func.date(DeviceDetailEntity.buyAt) == buy_at)
+        if warranty:
+            query = query.filter(func.date(DeviceDetailEntity.warranty) == warranty)
+        if status:
+            query = query.filter(DeviceDetailEntity.status.ilike(f"%{status}%"))
+
+        total = query.count()
+
+        results = query.order_by(DeviceDetailEntity.created_at.desc()) \
+                    .offset((page - 1) * limit) \
+                    .limit(limit).all()
+
+        return results, total
+
     
     
     def get_device_detail_by_id(self, id):

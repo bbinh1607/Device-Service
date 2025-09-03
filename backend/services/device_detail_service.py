@@ -1,3 +1,4 @@
+from backend.utils.response.response_helper import pager
 from device_service.backend.repository.device_detail_repository import DeviceDetailRepository
 from backend.schema.device_detail.device_detail_create_schema import DeviceDetailCreateSchema
 from backend.schema.device_detail.device_detail_reponse import DeviceDetailResponse
@@ -27,7 +28,9 @@ class DeviceDetailService:
         device_detail_entity = self.device_detail_repository.delete_device_detail(id)
         return DeviceDetailResponse().dump(device_detail_entity)
     
-    def get_all_device_detail(self):
-        device_detail_entities = self.device_detail_repository.get_all_device_detail()
-        return DeviceDetailResponse(many=True).dump(device_detail_entities)
-        
+    def get_all_device_detail(self, page=1, limit=10, name=None, create_at=None, device_id=None, area=None, buy_at=None, warranty=None, status=None):
+        result, total = self.device_detail_repository.get_all_device_detail(
+            page, limit, name, create_at, device_id, area, buy_at, warranty, status
+        )
+        result_data = DeviceDetailResponse(many=True).dump(result)
+        return pager(result_data, page, limit, total)

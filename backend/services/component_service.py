@@ -1,3 +1,4 @@
+from backend.utils.response.response_helper import pager
 from backend.repository.component_repository import ComponentRepository
 from backend.schema.component.component_create_schema import ComponentCreateSchema
 from backend.schema.component.component_reponse import ComponentResponse
@@ -34,9 +35,15 @@ class ComponentService:
         component = self.component_repository.delete_component(id)
         return ComponentResponse().dump(component)
         
-    def get_all_components(self):
-        components = self.component_repository.get_all_components()
-        return ComponentResponse(many=True).dump(components)
-        
-        
+    def get_all_components(self, page=1, limit=10, name=None, barcode=None, device_id=None):
+        result, total = self.component_repository.get_all_components(
+            page=page,
+            limit=limit,
+            name=name,
+            barcode=barcode,
+            device_id=device_id
+        )
+
+        result_data = ComponentResponse(many=True).dump(result)
+        return pager(result_data, page, limit, total)
         
